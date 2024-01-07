@@ -6,8 +6,14 @@ import { heroes } from '../data/heroes';
  */
 export const callbacksComponent = ( element ) => {
 
-    const id = '5d86371fd55e2e2a30fe1cc3';
-    findHero(id, (hero) => {
+    const id = '5d86371fd55e2e2a30fe1cc31';
+    findHero(id, (error, hero) => {
+
+        if ( error ) {
+            element.innerHTML = error;
+            return;
+        }
+
         element.innerHTML = hero.name;
     });
 
@@ -22,6 +28,11 @@ const findHero = (id, callback) => {
 
     const hero = heroes.find( hero => hero.id == id);
 
-    callback( hero );
+    if ( !hero ) {
+        callback(`Hero with id [${ id }] not found.`);
+        return;
+    }
+
+    callback( error, hero );
 
 }
