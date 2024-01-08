@@ -1,3 +1,4 @@
+
 import { heroes } from '../data/heroes';
 
 /**
@@ -6,7 +7,21 @@ import { heroes } from '../data/heroes';
  */
 export const promiseComponent = ( element ) => {
 
-    console.log('demo component');
+    const renderHero = ( hero ) => {
+        element.innerText = hero.name;
+    }
+
+    const renderError = ( error ) => {
+        element.innerText = error;
+    }
+
+    const id1 = '5d86371fd55e2e2a30fe1cc3';
+
+    findHero( id1 )
+        // .then( ( hero ) => renderHero( hero ) );
+        .then( renderHero )
+        // .catch( ( error ) => renderError( error ) );
+        .catch( renderError );
 
 }
 
